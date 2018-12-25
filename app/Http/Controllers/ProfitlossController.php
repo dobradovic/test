@@ -19,7 +19,9 @@ class ProfitlossController extends Controller
 {
 
   
-
+    publi function index(){
+      
+    }
 
 
     public function revenue()  
