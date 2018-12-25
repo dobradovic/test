@@ -20,13 +20,6 @@ class ProfitlossController extends Controller
 
   
 
-    public function index()
-    {
-       
-
-    
-    }
-
 
 
     public function revenue()  
