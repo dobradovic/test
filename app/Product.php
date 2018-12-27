@@ -21,25 +21,26 @@ class Product extends Model
     	return $this->belongsTo(User::class);
     }
 
-    public function getProductsBySearch($code, $name, $category_id)
-    {
-    	if($category === 'everywhere'){
+    public static function getProductsBySearch($code, $name, $category_id, $category)
+    {   
+            
+            if($name == null && $code ==null && $category=="everywhere")
+                return Product::all();
+                                  	
     		if($name != null && $code != null)
-    			return Product::where('name', 'LIKE', '%' . $name . '%')->where('code', $code)->first();
+    			return Product::where('name', 'LIKE', '%' . $name . '%')->where('code', $code)->get();
     		if($code != null && is_null($name))
-    			return Product::where('code', $code)->first();
+    			return Product::where('code', $code)->get();
     		if(is_null($code) && $name != null)
     			return Product::where('name', 'LIKE', '%' . $name . '%')->get();
-    	}
+    	   
+            if($name == null && $code ==null && $category)
+            return Product::where('category_id', $category)->get();
 
     
 
-    		if($name != null && $code != null)
-    			return Item::where('name', 'LIKE', '%' . $name . '%')->where('code', $code)->where('category_id', $category_id)->first();
-    		if($code != null && is_null($name))
-    			return Item::where('code', $code)->where('category_id', $category_id)->first();
-    		if(is_null($code) && $name != null)
-    			return Item::where('name', 'LIKE', '%' . $name . '%')->where('category_id', $category_id)->get();
+
+           
 
     }
 

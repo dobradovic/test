@@ -82,9 +82,8 @@ class ProductController extends Controller
     	]);
 
     
-    
-       
-        return redirect('/product/index')->with(['message' => 'New product added']);
+          
+    return redirect('/product/index')->with(['message' => 'New product added']);
 
       
     }
@@ -144,12 +143,13 @@ class ProductController extends Controller
     {
     	 $product_code = null;
     	 $product_name = null;
-    	 
+       
 
     	 (isset($request->product_name)? $product_name = $request->product_name : $product_name = null);
     	 (isset($request->product_code)? $product_code = $request->product_code : $product_code = null);
+        (isset($request->category)? $category = $request->category : $category = null);
 
-    	 $products = Product::getProductsBySearch($product_code, $product_name, $request->category);
+    	 $products = Product::getProductsBySearch($product_code, $product_name, $request->category, $category, $request->category_id);
     	 
        	 return view('products.index', compact('products'));
     }

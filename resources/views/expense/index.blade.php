@@ -28,7 +28,7 @@
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
-		              Total amount value Expenses:<p style="color:#85bb65">   {{$sum + $y + $total_summary}},00$</p>
+		              Total amount value Expenses:<p style="color:#85bb65">   {{$sum + $y}},00$</p>
 
 		             </h5>
 		            </div>

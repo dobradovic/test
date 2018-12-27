@@ -37,6 +37,7 @@
                 <th>Name</th>
                 <th>Last name</th>
                 <th>Address</th>
+                <th>Phone</th>
             </tr>
         </thead>
         <tbody>
@@ -45,6 +46,7 @@
                 <td>{{$customer->first_name}}</td>
                 <td>{{$customer->last_name}}</td>
                 <td>{{$customer->address}}</td>
+                 <td>{{$customer->phone}}</td>
                 <td><a href="order/edit/{{$customer->id}}">Create an order for {{$customer->first_name}}</a></td>
 
             </tr>

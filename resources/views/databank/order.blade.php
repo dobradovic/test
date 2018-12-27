@@ -81,6 +81,16 @@
                      <small class="text-danger">{{ $errors->first('address') }} *</small>
                 @endif
             </div>
+
+
+            <div class="col-sm-3">
+            {{Form::label('Phone:') }}
+            {{Form::text('phone') }}
+            
+                @if($errors->first('phone'))
+                     <small class="text-danger">{{ $errors->first('phone') }} *</small>
+                @endif
+            </div>
 <!-- 
              <div class="col-sm-3">
             {{Form::label('Phone:') }}

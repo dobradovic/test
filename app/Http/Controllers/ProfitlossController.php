@@ -19,7 +19,7 @@ class ProfitlossController extends Controller
 {
 
   
-    publi function index(){
+    public function index(){
       
     }
 
@@ -236,7 +236,7 @@ class ProfitlossController extends Controller
             
         $sum += $asset->price;
 
-        $total = $q + $sum;
+        $assets_total = $q + $sum;
 
         //Funds available 
 
@@ -331,12 +331,12 @@ class ProfitlossController extends Controller
 
         $profit = $revenue - ($sum + $y + $total_summary);
 
-        $a = $profit_product + $total + $funds_total;
+        $a = $profit_product + $total_summary + $funds_total;
         $p = $investments_total + $profit;
 
 
 
-        return view('profitandloss.balancesheet', compact('products','profit_product', 'total', 'funds_total', 'investments_total', 'profit', 'a', 'p'));
+        return view('profitandloss.balancesheet', compact('products','profit_product', 'assets_total', 'funds_total', 'investments_total', 'profit', 'a', 'p'));
 
         
      }

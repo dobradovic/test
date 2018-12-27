@@ -2,15 +2,21 @@
 
 @section('content')
 	<div class="container">
+	
+
 		<div class="row">
-
-
 		<div class="col-md-12">
 			<hr>
+
 			<h3 style="text-align: center; margin-top: 50px">Balacne sheet</h3>
-		
-			 		A
-				<div class="col-md-4">
+		</div>
+		</div>
+		<div class="row">
+			
+			
+				
+			 <div class="col-md-6">
+			 	Acitve
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
@@ -19,21 +25,22 @@
 		            </div>
 	               
 	 	         </div>
-	         </div>
+	       
+	       
 
-	         <div class="col-md-4">
+	        
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
-		            Assets:<p style="color:#85bb65">{{$total}},00$</p>
+		            Assets:<p style="color:#85bb65">{{$assets_total}},00$</p>
 		             </h5>
 		            </div>
 	               
 	 	         </div>
-	         </div>
+	       
 
 
-	         <div class="col-md-4">
+	         
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
@@ -42,11 +49,12 @@
 		            </div>
 	               
 	 	         </div>
-	         </div>
-
-
-	         	P
-				<div class="col-md-4">
+	     	</div>
+	         	
+	         	
+	         
+				<div class="col-md-6">
+				Passive
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
@@ -55,9 +63,9 @@
 		            </div>
 	               
 	 	         </div>
-	         </div>
+	       
 
-	         <div class="col-md-4">
+	        
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
@@ -67,34 +75,49 @@
 	               
 	 	         </div>
 	         </div>        		
-	      	</div>
+	        </div> 
+	       
+	        	
+	    
+	  
 
-	      	     <div class="col-md-4">
-	            <div class="card mb-4 shadow">
-		           <div class="card-header">
-		                <h5 style="text-align: center"> 
-		            a:<p style="color:#85bb65">{{$a}},00$</p>
-		             </h5>
-		            </div>
-	               
-	 	         </div>
-	         </div>        		
-	      	</div>
 
-	      	     <div class="col-md-4">
-	            <div class="card mb-4 shadow">
-		           <div class="card-header">
-		                <h5 style="text-align: center"> 
-		            p:<p style="color:#85bb65">{{$p}},00$</p>
-		             </h5>
-		            </div>
-	               
-	 	         </div>
-	         </div>        		
-	      	</div>
-		
-		
+			<div class="row">
+			<div class="col-md-6">
+				<div class="card mb-6 shadow">
+				<div class="card-header">
+					<h5 style="text-align: center"> 
+					Active:<p style="color:#85bb65">{{$a}},00$</p>
+					</h5>
+				</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card mb-6 shadow">
+				<div class="card-header">
+					<h5 style="text-align: center"> 
+					Passive:<p style="color:#85bb65">{{$p}},00$</p>
+					</h5>
+				</div>
+				</div>
+			</div>
+
+			@if( $a != $p )
+			<div class="col-md-12">
+					<br>
+			<div class="alert alert-danger">
+
+  			There is some problem with calculation
+
+			</div>
+
+			@endif
+			</div> 
+			</div>   		
+	</div>
+
+			
 	
 	</div>
-	</div>
+	
 @endsection

@@ -57,30 +57,30 @@ class ExpenseController extends Controller
            $y += $emp->salary * 12;
        }
 
-       $assets = Assets::latest()->paginate(20);
+       // $assets = Assets::latest()->paginate(20);
 
 
-       $q = 0;
-       $summary = 0;
+       // $q = 0;
+       // $summary = 0;
 
-       foreach($assets as $asset)
+       // foreach($assets as $asset)
 
-        if($asset->quantity == true){
+       //  if($asset->quantity == true){
 
-        $q += $asset->price * $asset->quantity;
+       //  $q += $asset->price * $asset->quantity;
 
-        }
-        else
+       //  }
+       //  else
             
-        $summary += $asset->price;
+       //  $summary += $asset->price;
 
-        $total_summary = $q + $summary;
+       //  $total_summary = $q + $summary;
 
 
 
 
     
-    	return view('expense.index', compact('expenses', 'monthly', 'yearly', 'sum', 'total','y','total_summary'));
+    	return view('expense.index', compact('expenses', 'monthly', 'yearly', 'sum', 'total','y'));
     
     }
 

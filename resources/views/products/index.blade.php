@@ -6,18 +6,27 @@
 
 			<form  class="col-md-12 row" action="/products/search" method="GET">
 
-		                     <div class="form-group col-md-3">
+		                     <div class="form-group col-md-4">
+
 		                         <div class="">
-		                             <input type="text" class="form-control" name="product_code"  placeholder="Search by PRODUCT CODE">
-		                             <input type="text" class="form-control" name="product_name"  placeholder="Search by PRODUCT NAME">
+		                         	Search by PRODUCT CODE
+		                             <input type="text" class="form-control" name="product_code"  placeholder="Product code">
+		                        
 		                         </div>
 		                     </div>
-		                     <div class="form-group col-md-3">
+
+		                        <div class="form-group col-md-4">
+
+		                         <div class="">
+		                          	Search by PRODUCT NAME
+		                             <input type="text" class="form-control" name="product_name"  placeholder="Product name">
+		                         </div>
+		                     </div>
+		                     <div class="form-group col-md-4">
 		                         <div class="">
 		                         	 Category:
 		                             <select  id="category_parent_search" class="form-control" name="category" required>
-		                                 <option value="everywhere">Everywhere</option
->		                                 @foreach($categories as $category)
+		                                 <option value="everywhere">Everywhere</option>		                               @foreach($categories as $category)
 		                                     <option value="{{$category->id}}">{{$category->name}}</option>
 		                                 @endforeach
 		                             </select>
@@ -46,19 +55,27 @@
 				@endif
 		
 		</div>
-	@foreach($products as $product)
+
+
+		@for($i=0;$i < count ($products);$i++)
+			
+
 			<div class="col-md-2">
 	            <div class="card mb-2 shadow">
-	                <a href="/item/{{$product->slug}}">
+	                <a href="/product/{{$products[$i]['slug']}}">
 	                    <div class="card-header">
-	                        <h5 style="text-align: center"> <a href="/product/edit/{{$product->id}}">{{$product->name}}</a></h5>
-	                        <a href="/product/edit/{{$product->id}}">Edit</a>
-	                        <a href="/product/delete/{{$product->id}}">Delete</a>
+	                        <h5 style="text-align: center"> <a href="/product/edit/{{$products[$i]['id']}}">{{$products[$i]['name']}}</a></h5>
+	                       
 	                    </div>
 	                </a>
 	                <div class="card-body">
-	                     <small><b>category: {{$product->category->name}}</b></small>
+	                	  <p><small><b>code: {{$products[$i]['code'] }}</b></small></p>
+
+	                     <small><b>category: {{$products[$i]['category']['name'] }}</b></small>
+	                    
 	                    <hr>
+	                     <a href="/product/edit/{{$products[$i]['id']}}">Edit</a>
+	                        <a href="/product/delete/{{$products[$i]['id']}}">Delete</a>
 	                    <div class="d-flex justify-content-between align-items-center">
 	                 
 	                    </div>
@@ -66,7 +83,7 @@
 	            </div>
 
 			</div>
-	@endforeach
+	@endfor
 	</div>
 	</div>
 @endsection

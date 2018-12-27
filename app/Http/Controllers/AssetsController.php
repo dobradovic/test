@@ -73,7 +73,7 @@ class AssetsController extends Controller
 
     public function edit($id)
     {
-         $asset = Investment::find($id);
+         $asset = Assets::find($id);
 
         return view('assets.edit', compact('asset', $asset));   
     }
@@ -97,6 +97,6 @@ class AssetsController extends Controller
      
         $asset->save();
 
-        return redirect('assets/index')->with(['asset' => $asset, 'message' => 'Asset updated']);
+        return redirect('asset/index')->with(['asset' => $asset, 'message' => 'Asset updated']);
     }
 }
