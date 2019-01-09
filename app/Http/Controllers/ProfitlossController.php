@@ -26,19 +26,17 @@ class ProfitlossController extends Controller
 
     public function revenue()  
     {   
-
      
         
         $products = Product::latest()->paginate(10)->where('status', '=', 2);
         //dd($products);
         $revenue = 0;
       
-        foreach($products as $product){
+        foreach($products as $product)
 
-          $revenue += $product->real_selling_price - $product->buying_price;
+          $revenue += $product->buying_price;
             
-        }
-          
+                  
         return view('profitandloss.revenue', compact('revenue', 'products'));
 
     }
@@ -54,6 +52,7 @@ class ProfitlossController extends Controller
          $monthly = 0;
          $yearly = 0;
          $sum = 0;
+         $sum_expenses = 0;
 
       
         foreach($expenses as $expense){
@@ -64,25 +63,27 @@ class ProfitlossController extends Controller
         $monthly +=  $expense->price;
         $yearly = $monthly * 12 ;
         $sum = $yearly;
+        $sum_expenses += $expense->price;
         }
 
         else
-         $sum += $expense->price;
+         $sum_expenses += $expense->price;
       }
 
       //Salaries calculation
 
        $employee = Employee::latest()->paginate(20);
 
-       $t = 0;
-       $y = 0;
+       $emp_salary = 0;
+       //$y = 0;
 
       
-
        foreach ($employee as $emp) {
-           $t += $emp->salary;
-           $y += $emp->salary * 12;
+           $emp_salary += $emp->salary;
+           //$y += $emp->salary * 12;
        }
+
+       //Assets calculation
 
        $assets = Assets::latest()->paginate(20);
 
@@ -101,9 +102,9 @@ class ProfitlossController extends Controller
             
         $summary += $asset->price;
 
-        $total_summary = $q + $summary;
+        $total_summary_assets = $q + $summary;
 
-        $total_expenses = $sum + $y + $total_summary;
+        $total_expenses = $sum_expenses + $emp_salary;
 
 
     
@@ -121,7 +122,9 @@ class ProfitlossController extends Controller
       
         foreach($products as $product){
 
-          $revenue += $product->real_selling_price - $product->buying_price;
+          //$product->real_selling_price -
+
+          $revenue +=  $product->buying_price;
             
         }
         
@@ -131,7 +134,7 @@ class ProfitlossController extends Controller
          $monthly = 0;
          $yearly = 0;
          $sum = 0;
-
+         $sum_expenses = 0;
       
         foreach($expenses as $expense){
 
@@ -141,23 +144,24 @@ class ProfitlossController extends Controller
         $monthly +=  $expense->price;
         $yearly = $monthly * 12 ;
         $sum = $yearly;
+        $sum_expenses += $expense->price;
         }
 
         else
-         $sum += $expense->price;
+         $sum_expenses += $expense->price;
       }
 
       //Salaries calculation
 
        $employee = Employee::latest()->paginate(20);
 
-       $t = 0;
+       $monthly_salary = 0;
        $y = 0;
 
       
 
        foreach ($employee as $emp) {
-           $t += $emp->salary;
+           $monthly_salary += $emp->salary;
            $y += $emp->salary * 12;
        }
 
@@ -180,7 +184,7 @@ class ProfitlossController extends Controller
 
         $total_summary = $q + $summary;
 
-        $profit = $revenue - ($sum + $y + $total_summary);
+        $profit = $revenue - ($sum_expenses + $monthly_salary);
 
     
       return view('profitandloss.profit', compact('expenses', 'profit'));
@@ -192,21 +196,19 @@ class ProfitlossController extends Controller
 
         //Products availabe and pending
 
-         $available_products = Product::all()->where('status', '=', 1);
+        $available_products = Product::all()->where('status', '=', 1);
 
         $profit_product = 0;
         $profit_available = 0;
+        $profit_pending = 0;
       
         foreach($available_products as $available_product)
 
         $profit_available += $available_product->real_selling_price;
   
       
-
         $pending_products = Product::all()->where('status', '=', 3);
-
-        
-        $profit_pending = 0;
+          
       
         foreach($pending_products as $pending_product){
 
@@ -222,21 +224,21 @@ class ProfitlossController extends Controller
           $assets = Assets::all();
 
 
-       $q = 0;
-       $sum = 0;
+       $asset_quantity = 0;
+       $asset_sum = 0;
 
        foreach($assets as $asset)
 
         if($asset->quantity == true){
 
-        $q += $asset->price * $asset->quantity;
+        $asset_quantity += $asset->price * $asset->quantity;
 
         }
         else
             
-        $sum += $asset->price;
+        $asset_sum += $asset->price;
 
-        $assets_total = $q + $sum;
+        $assets_total = $asset_quantity + $asset_sum;
 
         //Funds available 
 
@@ -280,9 +282,10 @@ class ProfitlossController extends Controller
          $monthly = 0;
          $yearly = 0;
          $sum = 0;
+         $sum_expenses = 0;
 
       
-        foreach($expenses as $expense){
+       foreach($expenses as $expense){
 
         
         if($expense->monthly == 1){
@@ -290,50 +293,52 @@ class ProfitlossController extends Controller
         $monthly +=  $expense->price;
         $yearly = $monthly * 12 ;
         $sum = $yearly;
+        $sum_expenses += $expense->price;
         }
 
         else
-         $sum += $expense->price;
+         $sum_expenses += $expense->price;
       }
+
+
 
       //Salaries calculation
 
        $employee = Employee::latest()->paginate(20);
 
-       $t = 0;
+       $emp_salary = 0;
        $y = 0;
 
       
 
        foreach ($employee as $emp) {
-           $t += $emp->salary;
+           $emp_salary += $emp->salary;
            $y += $emp->salary * 12;
        }
 
        $assets = Assets::latest()->paginate(20);
 
-
-       $q = 0;
-       $summary = 0;
+       $asset_quantity = 0;
+       $asset_sum = 0;
+    
 
        foreach($assets as $asset)
 
         if($asset->quantity == true){
 
-        $q += $asset->price * $asset->quantity;
+        $asset_quantity += $asset->price * $asset->quantity;
 
         }
         else
             
-        $summary += $asset->price;
+        $asset_sum += $asset->price;
 
-        $total_summary = $q + $summary;
+        $total_assets_summary = $asset_quantity + $asset_sum;
 
-        $profit = $revenue - ($sum + $y + $total_summary);
+        $profit = $revenue - ($emp_salary + $sum_expenses);
 
-        $a = $profit_product + $total_summary + $funds_total;
+        $a = $profit_product + $total_assets_summary + $funds_total;
         $p = $investments_total + $profit;
-
 
 
         return view('profitandloss.balancesheet', compact('products','profit_product', 'assets_total', 'funds_total', 'investments_total', 'profit', 'a', 'p'));

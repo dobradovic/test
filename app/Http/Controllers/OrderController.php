@@ -46,10 +46,7 @@ class OrderController extends Controller
     }
 
 
-    public function update(Request $request, $id)
-    {
-        //
-    }
+
 
     
     public function destroy($id)
@@ -91,6 +88,8 @@ class OrderController extends Controller
 
 
 
+
+
     public function getCart()
     {
         if(!Session::has('cart')){
@@ -99,5 +98,59 @@ class OrderController extends Controller
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         return view('databank.cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+     public function searchOrder(Request $request)
+    {
+
+
+         $code = null;
+         $product_name = null;
+
+          $code=$request->code;
+          $name=$request->name;
+
+
+          $codeAjax = Product::where('name', 'like', '%' . $name . '%')
+          ->where('code', 'like', '%' . $code . '%')->get();
+
+          
+         
+          
+
+         // return view('databank.order', compact('products'));
+        return view('databank.ajaxCode',compact('codeAjax'));
+    }
+
+
+    public function update(Request $request)
+    {
+        if($request->id and $request->quantity)
+        {
+            $cart = session()->get('cart');
+ 
+            $cart[$request->id]["quantity"] = $request->quantity;
+ 
+            session()->put('cart', $cart);
+ 
+            session()->flash('success', 'Cart updated successfully');
+        }
+    }
+ 
+    public function remove(Request $request)
+    {
+        if($request->id) {
+ 
+            $cart = session()->get('cart');
+ 
+            if(isset($cart[$request->id])) {
+ 
+                unset($cart[$request->id]);
+ 
+                session()->put('cart', $cart);
+            }
+ 
+            session()->flash('success', 'Product removed successfully');
+        }
     }
 }

@@ -61,6 +61,16 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+
+          $this->validate($request,[
+           'name' => 'required',
+           'buying_price' => 'required|integer',
+           'real_selling_price' => 'required|integer',
+           'wanted_selling_price' => 'required|integer',
+           'code' => 'required',
+          ]);
+
+
         $product = Product::where('code', '=' , $request->code)->first();
 
         if($product){

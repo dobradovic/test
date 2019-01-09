@@ -8,7 +8,7 @@
 		<div class="col-md-12">
 			<hr>
 
-			<h3 style="text-align: center; margin-top: 50px">Balacne sheet</h3>
+			<h3 style="text-align: center; margin-top: 50px">Balance sheet</h3>
 		</div>
 		</div>
 		<div class="row">
@@ -16,7 +16,7 @@
 			
 				
 			 <div class="col-md-6">
-			 	Acitve
+			 	Assets
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
@@ -54,7 +54,7 @@
 	         	
 	         
 				<div class="col-md-6">
-				Passive
+				Liabilities
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
@@ -69,7 +69,9 @@
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
-		            Profit:<p style="color:#85bb65">{{$profit}},00$</p>
+		            Profit / Loss:<p style="color:#85bb65">{{$profit}},00$</p>
+
+		            
 		             </h5>
 		            </div>
 	               
@@ -87,7 +89,7 @@
 				<div class="card mb-6 shadow">
 				<div class="card-header">
 					<h5 style="text-align: center"> 
-					Active:<p style="color:#85bb65">{{$a}},00$</p>
+					Assets:<p style="color:#85bb65">{{$a}},00$</p>
 					</h5>
 				</div>
 				</div>
@@ -96,9 +98,9 @@
 				<div class="card mb-6 shadow">
 				<div class="card-header">
 					<h5 style="text-align: center"> 
-					Passive:<p style="color:#85bb65">{{$p}},00$</p>
+					Liabilities:<p style="color:#85bb65">{{$p}},00$</p>
 					</h5>
-				</div>
+					</div>
 				</div>
 			</div>
 
@@ -107,7 +109,7 @@
 					<br>
 			<div class="alert alert-danger">
 
-  			There is some problem with calculation
+  			There is a problem with calculation
 
 			</div>
 

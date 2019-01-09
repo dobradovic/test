@@ -59,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('order/edit/{id}', 'OrderController@edit');
 
 	Route::any('/search','CustomerController@search');
+	Route::post('/searchOrder', 'OrderController@searchOrder');
 
 
    	Route::get('add-to-cart/{id}', 'OrderController@addToCart');
@@ -67,6 +68,14 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/reduce/{id}', 'OrderController@getReduceByOne');
 
 	Route::get('/remove/{id}', 'OrderController@getRemoveItem');
+
+	Route::get('/removeItems/{id}', 'OrderController@getRemoveItems');
+	Route::post('/cartStore', 'OrderController@store');
+
+	Route::patch('update-cart', 'OrderController@update');
+ 
+Route::delete('remove-from-cart', 'OrderController@remove');
+
 
 
 	Route::get('expense/create', 'ExpenseController@create');

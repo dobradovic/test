@@ -3,13 +3,10 @@
 @section('content')
 
 
-                <div class="col-md-12">
+          <div class="col-md-12">
             <hr>
           
-
-       
-              
-        
+    
         </div>
 <div class="container">
 	<div class="row">
@@ -107,7 +104,7 @@
                    <input style="margin-top:50px" id="submit" class="btn btn-primary btn-md" type="submit" class="form-control" name="submit" value="Create new order and invoice" required />
                </div>
             </div>
-        </form>
+   
             
 
         <a href="/shopping-cart">
@@ -116,30 +113,55 @@
          </a>
          
 			</div>
-			</form>
+		  {{ Form::close() }}
+
+
+        <!--     <form  class="col-md-12 row" action="/products/search" method="GET"> -->
+            <div class="col-md-12">
+                             <div class="form-group col-md-4">
+
+                                 <div class="">
+                                    Search by PRODUCT CODE
+                                     <input type="text" class="form-control" name="product_code_search"  id="product_code_search" placeholder="Product code">
+                                    
+                                 </div>
+                             </div>
+
+                                <div class="form-group col-md-4">
+
+                                 <div class="">
+                                    Search by PRODUCT NAME
+                                     <input type="text" class="form-control" name="product_name_search" id="product_name_search" placeholder="Product name">
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-4">
+                                 <div class="">
+                                     Category:
+                                     <select  id="category_parent_search" class="form-control" name="category" required>
+                                         <option value="everywhere">Everywhere</option>                                    @foreach($categories as $category)
+                                             <option value="{{$category->id}}">{{$category->name}}</option>
+                                         @endforeach
+                                     </select>
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-2">
+                                 <div class="">
+                                     <input type="submit" class="btn-secondary btn form-control" value="Search">
+                                 </div>
+                             </div>
+
+                             <div id="ajaxCode">
+
+    
+                             </div>
+
+                  
+
+                             </div>
+         <!--    </form> -->
                          <!--    <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : ''}}</span> -->
-                               @foreach($products as $product)
-            <div class="col-md-6">
-                <div class="card mb-6 shadow">
-                    <a href="/item/{{$product->slug}}">
-                        <div class="card-header">
-                            <h5 style="text-align: center"> <a href="/product/edit/{{$product->id}}">{{$product->name}}</a></h5>
-                         <button type="button"><a href="/add-to-cart/{{$product->id}}">Add to cart</a></button>
-                         
-                        </div>
-                    </a>
-                    <div class="card-body">
-                         <small><b>category: {{$product->category->name}}</b></small>
-                        <hr>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small><h6>Price: {{$product->real_selling_price}},00 $</h6></small>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-    @endforeach
-		</div>
+
+         		</div>
 
 	</div>
 
@@ -162,7 +184,68 @@
     <p><input type="text" id="model" name="myModel" placeholder="Model" disabled /></p>
 </form> -->
 </div>
-<script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+$('#product_code_search, #product_name_search').on('keyup',function(){
+
+var code=$('#product_code_search').val();
+var name=$('#product_name_search').val();
+var token =  $('input[name="_token"]').attr('value');
+
+$.ajax({
+
+type : 'POST',
+
+url : '/searchOrder',
+
+data:{
+    'code':code,
+    'name':name
+
+},
+
+headers:{
+     'X-CSRF-Token' : token
+ },
+
+success:function(data){
+    
+ $('#ajaxCode').html(data);
+
+
+}
+});
+})
+
+})
+
+
 
 </script>
+
+
+
+<!-- $(document).ready(function(){
+    $('.dynamic').change(function(){
+
+       var id = $('.dynamic').val();
+       var token =  $('input[name="_token"]').attr('value');
+    
+       $.ajax({
+            type:'POST',
+            url:'/dynamic_dependent/fetch',
+            data:{
+                'id':id
+            },
+            headers:{
+               'X-CSRF-Token' : token
+            },
+            success:function(data){
+                $('#ajaxProducts').html(data);
+            }
+       });
+    });
+}); -->
+
 @endsection

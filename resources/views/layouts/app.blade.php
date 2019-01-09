@@ -109,7 +109,13 @@
                                     <a class="dropdown-item" href="/product/index">
                                         Show all products
                                     </a>
-                                </div>
+                                    <a class="dropdown-item" href="/category">
+                                        Add new category for product
+                                    </a>
+                                      <a class="dropdown-item" href="/category/show_all_categories">
+                                       Edit / Delete product category
+                                    </a>
+                                </div>                                                         
                             </li>
 
                             <li class="nav-item dropdown">
@@ -154,10 +160,10 @@
 
                             </li>
 
-
+<!-- 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Category <span class="caret"></span>
+                                    Product category <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -169,8 +175,8 @@
                                     </a>
 
                                 </div>
-
-
+                            </li>
+ -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Employees <span class="caret"></span>
