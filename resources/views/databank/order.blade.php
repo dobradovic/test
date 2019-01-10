@@ -25,9 +25,6 @@
 </form>
 
 
-
-
-
 			<form method="POST" action="/order/store">
 				@csrf
 				<div class="form-group row">
@@ -53,6 +50,7 @@
             
             {{ csrf_field() }}
             <div class="col-sm-3">
+            {{ Form::hidden('customer', $customer->id, array('id' => 'customer')) }}
             {{Form::label('First name:') }}
             {{Form::text('first_name') }}
            
@@ -137,9 +135,11 @@
                              <div class="form-group col-md-4">
                                  <div class="">
                                      Category:
-                                     <select  id="category_parent_search" class="form-control" name="category" required>
-                                         <option value="everywhere">Everywhere</option>                                    @foreach($categories as $category)
+                                     <select  id="category_search" class="form-control" name="category_search" required>
+                                         <option value="everywhere">Choose category...</option>                                    @foreach($categoriesMain as $category)
+                                     
                                              <option value="{{$category->id}}">{{$category->name}}</option>
+                                       
                                          @endforeach
                                      </select>
                                  </div>
@@ -154,6 +154,7 @@
 
     
                              </div>
+
 
                   
 
@@ -191,6 +192,7 @@ $('#product_code_search, #product_name_search').on('keyup',function(){
 
 var code=$('#product_code_search').val();
 var name=$('#product_name_search').val();
+var customer=$('#customer').val();
 var token =  $('input[name="_token"]').attr('value');
 
 $.ajax({
@@ -200,6 +202,7 @@ type : 'POST',
 url : '/searchOrder',
 
 data:{
+    'customer':customer,
     'code':code,
     'name':name
 
@@ -210,7 +213,7 @@ headers:{
  },
 
 success:function(data){
-    
+    console.log(customer);
  $('#ajaxCode').html(data);
 
 
@@ -222,7 +225,32 @@ success:function(data){
 
 
 
+$(document).ready(function(){
+    $('#category_search').change(function(){
+
+       var id = $('#category_search').val();
+       var token =  $('input[name="_token"]').attr('value');
+    
+       $.ajax({
+            type:'POST',
+            url:'/searchOrderCategory',
+            data:{
+                'id':id
+            },
+            headers:{
+               'X-CSRF-Token' : token
+            },
+            success:function(data){
+                $('#ajaxCode').html(data);
+            }
+       });
+    });
+});
+
 </script>
+
+
+
 
 
 

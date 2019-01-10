@@ -60,9 +60,10 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::any('/search','CustomerController@search');
 	Route::post('/searchOrder', 'OrderController@searchOrder');
+	Route::post('/searchOrderCategory', 'OrderController@searchOrderCategory');
 
 
-   	Route::get('add-to-cart/{id}', 'OrderController@addToCart');
+   	Route::get('add-to-cart/{id}/{customer_id}', 'OrderController@addToCart');
 	Route::get('shopping-cart', 'OrderController@getCart');	
 
 	Route::get('/reduce/{id}', 'OrderController@getReduceByOne');
@@ -74,7 +75,8 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::patch('update-cart', 'OrderController@update');
  
-Route::delete('remove-from-cart', 'OrderController@remove');
+	Route::delete('remove-from-cart', 'OrderController@remove');
+	Route::post('/storeOrderCustomer','OrderController@store');
 
 
 

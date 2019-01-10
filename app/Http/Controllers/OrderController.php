@@ -27,7 +27,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     public function show($id)
@@ -36,13 +36,28 @@ class OrderController extends Controller
     }
 
 
-    public function edit($id)
-    {
+    public function edit(Request $request, $id)
+    {   
+        if($request->session()->has('cart'))
+        {
+             
+             if($request->session()->has('customer'))
+            {
+                if(session('customer')->id != $id){
+
+                    $request->session()->forget('customer');
+                    $request->session()->forget('cart');
+                }
+            }
+            
+        }
+     
+      
         $customer = Customer::find($id);
         $products = Product::latest()->with('category')->paginate(10);
+        $categoriesMain= Category::all()->where('parent_category_id','=',null);
 
-
-        return view('databank.order',compact('customer',$customer,'products',$products));    
+        return view('databank.order',compact('customer','products','categoriesMain'));    
     }
 
 
@@ -54,14 +69,28 @@ class OrderController extends Controller
         //
     }
 
-    public function addToCart(Request $request, $id){
+    public function addToCart(Request $request, $id, $customer_id){
 
+
+        if($request->session()->has('customer'))
+        {
+             
+            if(session('customer')->id != $customer_id){
+
+                $request->session()->forget('customer');
+            }
+        }
+     
+
+        $customer = Customer::where('id','=',$customer_id)->first();
         $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product,$product->id);
 
         $request->session()->put('cart', $cart);
+        $request->session()->put('customer', $customer);
+        
         return redirect()->back();
 
     }
@@ -86,10 +115,6 @@ class OrderController extends Controller
     }
 
 
-
-
-
-
     public function getCart()
     {
         if(!Session::has('cart')){
@@ -103,7 +128,7 @@ class OrderController extends Controller
      public function searchOrder(Request $request)
     {
 
-
+         $customer_id = $request->customer;
          $code = null;
          $product_name = null;
 
@@ -114,12 +139,17 @@ class OrderController extends Controller
           $codeAjax = Product::where('name', 'like', '%' . $name . '%')
           ->where('code', 'like', '%' . $code . '%')->get();
 
-          
-         
-          
-
          // return view('databank.order', compact('products'));
-        return view('databank.ajaxCode',compact('codeAjax'));
+        return view('databank.ajaxCode',compact('codeAjax','customer_id'));
+    }
+
+    public function searchOrderCategory(Request $request)
+    {
+        $id=$request->id;
+
+        $categoriesAjax=Product::where('category_id','=',$id)->get();
+      
+        return view('databank.ajaxCategory',compact('categoriesAjax'));
     }
 
 
