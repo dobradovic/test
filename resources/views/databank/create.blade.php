@@ -20,7 +20,7 @@
         <input type="text" class="form-control" name="q"
             placeholder="Search users"> <span class="input-group-btn">
             <button type="submit" class="btn btn-default">
-                <span class="glyphicon glyphicon-search"></span>
+              Search
             </button>
         </span>
     </div>

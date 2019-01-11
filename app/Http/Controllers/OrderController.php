@@ -27,7 +27,22 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        
+        $orders = $request->all();
+
+       
+        for($i=0;$i < count($orders['customer_id']);$i++){  
+         echo $orders['customer_id'][$i].'<br/>';
+         echo $orders['product_id'][$i].'<br/>';
+           
+
+
+       }
+
+        
+    
+       
+        
     }
 
     public function show($id)
@@ -100,7 +115,6 @@ class OrderController extends Controller
         $cart = new Cart($oldCart);
         $cart->reduceByOne($id);
 
-
         Session::put('cart',$cart);
         return redirect('/shopping-cart');
        
@@ -145,11 +159,12 @@ class OrderController extends Controller
 
     public function searchOrderCategory(Request $request)
     {
+        $customer_id = $request->customer;
         $id=$request->id;
 
         $categoriesAjax=Product::where('category_id','=',$id)->get();
       
-        return view('databank.ajaxCategory',compact('categoriesAjax'));
+        return view('databank.ajaxCategory',compact('categoriesAjax','customer_id'));
     }
 
 

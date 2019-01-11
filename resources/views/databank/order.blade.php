@@ -18,7 +18,7 @@
         <input type="text" class="form-control" name="q"
             placeholder="Search users"> <span class="input-group-btn">
             <button type="submit" class="btn btn-default">
-                <span class="glyphicon glyphicon-search"></span>
+               Search
             </button>
         </span>
     </div>
@@ -153,10 +153,7 @@
                              <div id="ajaxCode">
 
     
-                             </div>
-
-
-                  
+                             </div>                
 
                              </div>
          <!--    </form> -->
@@ -229,13 +226,15 @@ $(document).ready(function(){
     $('#category_search').change(function(){
 
        var id = $('#category_search').val();
+       var customer=$('#customer').val();
        var token =  $('input[name="_token"]').attr('value');
     
        $.ajax({
             type:'POST',
             url:'/searchOrderCategory',
             data:{
-                'id':id
+                'id':id,
+                'customer':customer
             },
             headers:{
                'X-CSRF-Token' : token

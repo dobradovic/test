@@ -12,15 +12,25 @@
 
 				<ul class="list-group">
 					<form id="OrderCustomer" action="/storeOrderCustomer" method="POST">
-		@csrf
-					
+					@csrf
+						
 
-					Customer First Name : {{ session('customer')->first_name }}
+					<li class="list-group-item">
+						<h4>Customer information</h4>
+						<p> First name : {{ session('customer')->first_name }}</p>
+						<p> Last name : {{ session('customer')->last_name }}</p>
+						<p> Address : {{ session('customer')->address }}</p>
+						<p> Phone : {{ session('customer')->phone }}</p>
+					</li>
 					
 
 					@foreach($products as $product)
-						<input type="hidden" name="product_name" value="{{$product['product']['name']}}" />
-						<input type="hidden" name="product_price" value="{{$product['price']}}" />
+
+						<input type="hidden" name="product_name[]" value="{{$product['product']['name']}}" />
+						<input type="hidden" name="product_code[]" value="{{$product['product']['code']}}" />
+						<input type="hidden" name="product_price[]" value="{{$product['price']}}" />
+						<input type="hidden" name="customer_id[]" value="{{ session('customer')->id }}" />
+						<input type="hidden" name="product_id[]" value="{{$product['product']['id']}}" />
 						<li class="list-group-item">
 							<span class="badge"> <p>Quantity:{{
 								$product['qty']}} - price for each product {{$product['product']['real_selling_price']}} </p></span>
@@ -37,8 +47,8 @@
 										</ul>
 										
                         
-                        <a href="/remove/{{$product['product']['id']}}"><button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $product['product']['id']}}"><i class="fa fa-trash-o"></i></button></a>
-                    	
+                        <a href="/remove/{{$product['product']['id']}}">Delete item</a>
+                    <!-- 	<button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $product['product']['id']}}"><i class="fa fa-trash-o"></i></button> -->
 									</div>
 								</span>
 													

@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/searchOrder', 'OrderController@searchOrder');
 	Route::post('/searchOrderCategory', 'OrderController@searchOrderCategory');
 
-
+	
    	Route::get('add-to-cart/{id}/{customer_id}', 'OrderController@addToCart');
 	Route::get('shopping-cart', 'OrderController@getCart');	
 
@@ -77,7 +77,6 @@ Route::middleware(['auth'])->group(function () {
  
 	Route::delete('remove-from-cart', 'OrderController@remove');
 	Route::post('/storeOrderCustomer','OrderController@store');
-
 
 
 	Route::get('expense/create', 'ExpenseController@create');

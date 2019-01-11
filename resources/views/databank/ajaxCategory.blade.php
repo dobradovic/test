@@ -2,7 +2,7 @@
 	There is no records
 @endif
 @foreach($categoriesAjax as $category)
-       
+      
         <div class="col-md-6">
                 <div class="card mb-6 shadow">
                     <a href="#">
@@ -17,7 +17,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <small><h6>Price: {{$category->real_selling_price}},00 $</h6></small>
                         </div>
-                             <button type="button"><a href="/add-to-cart/{{$category->id}}">Add to cart</a></button>
+                             <button type="button"><a href="/add-to-cart/{{$category->id}}/{{$customer_id}}">Add to cart</a></button>
                     </div>
 
                 </div>
