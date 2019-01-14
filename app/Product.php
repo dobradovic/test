@@ -21,6 +21,13 @@ class Product extends Model
     	return $this->belongsTo(User::class);
     }
 
+    public function order()
+    {
+        return $this->belongsToMany(Order::class);
+    }
+
+
+
     public static function getProductsBySearch($code, $name, $category_id, $category)
     {   
             

@@ -7,6 +7,7 @@ use App\Customer;
 use App\Category;
 use App\Employee;
 use App\Product;
+use App\Order;
 use Carbon\Carbon;
 use Session;
 use App\Cart;
@@ -28,22 +29,34 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         
-        $orders = $request->all();
-
        
-        for($i=0;$i < count($orders['customer_id']);$i++){  
-         echo $orders['customer_id'][$i].'<br/>';
-         echo $orders['product_id'][$i].'<br/>';
-           
 
-
-       }
-
+        $order = new Order();
+        $order->customer_id = $request->customer_id[0];
         
+        $order->save();
+       
+        $order = Order::find($order->id);
+        $products_id = [];
+        foreach($request->product_id as $product){
+            array_push($products_id, $product);
+        } 
+      
+        $order->product()->attach($products_id);
+
+        $proba = Order::with('product')->get();
+
     
-       
-        
+
+       return view('databank.showOrder',compact('proba'));
+      
+      
+        // for($i=0;$i < count($orders['customer_id']);$i++){  
+        //  echo $orders['customer_id'][$i].'<br/>';
+        //  echo $orders['product_id'][$i].'<br/>';
+           
     }
+
 
     public function show($id)
     {
