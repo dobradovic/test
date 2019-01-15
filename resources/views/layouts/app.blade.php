@@ -64,13 +64,13 @@
                                     <a class="dropdown-item" href="/order/create">
                                         Create new invoice
                                     </a>
-                                    <a class="dropdown-item" href="/product/index">
+                                    <a class="dropdown-item" href="/order/pending">
                                         Pending invoices
                                     </a>
-                                    <a class="dropdown-item" href="/product/index">
+                                    <a class="dropdown-item" href="/order/resolved">
                                         Resolved invoices
                                     </a>
-                                    <a class="dropdown-item" href="/product/create">
+                                    <a class="dropdown-item" href="/order/customersInvoices">
                                         All customers and their invoices
                                     </a>
                                 </div>

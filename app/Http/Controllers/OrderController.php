@@ -44,9 +44,7 @@ class OrderController extends Controller
       
         $order->product()->attach($products_id);
 
-        $proba = Order::with('product')->get();
-
-    
+        $proba = Order::with('product')->with('customer')->get();
 
        return view('databank.showOrder',compact('proba'));
       
@@ -56,6 +54,54 @@ class OrderController extends Controller
         //  echo $orders['product_id'][$i].'<br/>';
            
     }
+
+    public function customersInvoices()
+    {
+        $proba = Order::with('product')->get();
+
+        return view('databank.customersInvoices',compact('proba'));
+    }
+
+    public function pending(){
+
+        $pending = Order::with('product')->get();
+
+        return view('databank.pending', compact('pending'));
+
+    }
+
+      public function resolved(){
+
+        $resolved = Order::with('product')->get();
+
+        return view('databank.resolved', compact('resolved'));
+
+    }
+
+    public function updateToResolved(Request $request){
+
+
+            
+            $order_id = $request->input('order_id');
+            $status = $request->input('update_invoice');
+             
+                    
+            dd($order_id);
+
+            $order = Product::findOrFail($order_id);
+            $order->status = $request->input('update_invoice');
+        
+            $order->save();
+
+          return redirect()->back()->with(['message' => 'Invoice  successfuly updated to Resolved']);
+   
+
+         
+          
+        
+
+    }
+
 
 
     public function show($id)

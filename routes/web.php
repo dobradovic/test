@@ -56,6 +56,10 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('customer/store', 'CustomerController@store');
 
 	Route::get('order/create', 'OrderController@create');
+	Route::get('order/customersInvoices','OrderController@customersInvoices');
+	Route::get('order/pending','OrderController@pending');
+	Route::get('order/resolved','OrderController@resolved');
+	Route::post('order/updateInvoice','OrderController@updateToResolved');
 	Route::get('order/edit/{id}', 'OrderController@edit');
 
 	Route::any('/search','CustomerController@search');
