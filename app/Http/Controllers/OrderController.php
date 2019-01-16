@@ -78,35 +78,31 @@ class OrderController extends Controller
 
     }
 
-    public function updateToResolved(Request $request){
-
-
+    public function updateToResolved(Request $request,$order_id){
             
-            $order_id = $request->input('order_id');
-            $status = $request->input('update_invoice');
-             
-                    
-            dd($order_id);
+            $status = $request->input('update_invoice');    
 
-            $order = Product::findOrFail($order_id);
-            $order->status = $request->input('update_invoice');
-        
-            $order->save();
+            if($status[0] == 2){      
+                         
+            Order::where('id','=',$order_id)->update(['status' => $status[0]]);
 
-          return redirect()->back()->with(['message' => 'Invoice  successfuly updated to Resolved']);
-   
-
-         
-          
-        
-
+            return redirect()->back()->with(['message' => 'Invoice  successfuly updated to Resolved']);
+            }
+            else
+                return redirect()->back()->with('alert', 'You must populate chechbox!');
     }
 
 
 
     public function show($id)
     {
-        //
+      
+    
+    $order = Order::with('customer')->with('product')->where('id','=', $id)->get();
+      
+        return view('databank.print', compact('order'));
+        
+    
     }
 
 

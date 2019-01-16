@@ -163,11 +163,6 @@
 
 	</div>
 
-
-
-
-    
-
 <!-- <form id="myForm">
     <h3>Section 1</h3>
     Checkbox 1: <input type="checkbox" name="checkbox1" id="checkboxOne" onclick="enableDisableAll();" />

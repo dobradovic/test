@@ -59,8 +59,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('order/customersInvoices','OrderController@customersInvoices');
 	Route::get('order/pending','OrderController@pending');
 	Route::get('order/resolved','OrderController@resolved');
-	Route::post('order/updateInvoice','OrderController@updateToResolved');
+	Route::post('order/updateInvoice/{id}','OrderController@updateToResolved');
 	Route::get('order/edit/{id}', 'OrderController@edit');
+	Route::get('order/print/{id}', 'OrderController@show');
 
 	Route::any('/search','CustomerController@search');
 	Route::post('/searchOrder', 'OrderController@searchOrder');

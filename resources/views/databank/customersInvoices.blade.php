@@ -37,8 +37,10 @@
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Address</th>
+                    <th>Phone</th>
                     <th>Product name</th>
                     <th>Product code</th>
+                    <th>Order ID</th>
                     <th>Status invoice</th>
                     </tr>
                     </thead>
@@ -51,6 +53,7 @@
                     <td>{{$prob->customer->first_name}}</td>
                     <td>{{$prob->customer->last_name}}</td>
                     <td>{{$prob->customer->address}}</td>
+                    <td>{{$prob->customer->phone}}</td>
                     <td>{{$prob->product[$i]->name}}</td>
                     <td>{{$prob->product[$i]->code}}</td>
                     <td>{{$prob->id}}</td>

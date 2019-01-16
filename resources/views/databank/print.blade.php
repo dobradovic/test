@@ -11,7 +11,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-        <h2>All Customers and thier invoices</h2>
+        <h2>Customer:  {{$order[0]->customer->first_name}}  {{$order[0]->customer->last_name}}</h2>
 
 
       
@@ -48,49 +48,61 @@
                     <th>Product code</th>
                     <th>Order ID</th>
                     <th>Status invoice</th>
-                    <th>Change status to resolved</th>
+                    <th>PRINT invoice</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($pending as $pInvoice)
-                                       
-                   @for($i=0; $i < count($pInvoice->product);$i++)
-                  
+                      
                     <tr>
-                    @if($pInvoice->status == 1)
-                    <td>{{$pInvoice->customer->first_name}}</td>
-                    <td>{{$pInvoice->customer->last_name}}</td>
-                    <td>{{$pInvoice->customer->address}}</td>
-                    <td>{{$pInvoice->customer->phone}}</td>
-                    <td>{{$pInvoice->product[$i]->name}}</td>
-                    <td>{{$pInvoice->product[$i]->code}}</td>
-                    <td>{{$pInvoice->id}}</td>
-                    <td>Pending</td>
-                    <td>Change to resolved 
-                       <form method="POST" action="/order/updateInvoice/{{$pInvoice->id}}">
-                        @csrf
-                         <input type="hidden" name="order_id[]" value="{{$pInvoice->id}}" />
-                        <input type="checkbox" name="update_invoice[]" id="update_invoice" value="2" ><input type="submit"></td>
-                        </form>
                     <td>
-                        <a href="/order/print/{{$pInvoice->customer->id}}">Create pdf for customer</a>
-                  <!--       <p>Click the button to print the current page.</p>
+                  
+                     {{$order[0]->customer->first_name}}
+                
+                    
+                    
+                    </td>
+                    <td>
+                          {{$order[0]->customer->last_name}}
+                    </td>
+                      <td>
+                          {{$order[0]->customer->address}}
+                    </td>
+                      <td>
+                          {{$order[0]->customer->phone}}
+                    </td>
+                      <td>
+                         {{$order[0]->product[0]->name}}
+                    </td>
+                      <td>
+                         {{$order[0]->product[0]->code}}
+                    </td>
+                     <td>
+                         {{$order[0]->id}}
+                    </td>
+                    <td>
+                          {{$order[0]['status']}}
+                    </td>
+                     <td>
+                                
 
-                        <button onclick="myFunction()">Print this page</button>
+                        <button onclick="myFunction()">Print this to pdf</button>
 
                         <script>
                         function myFunction() {
                         window.print();
                         }
-                        </script> -->
+                        </script>
                     </td>
-                    @endif
-                    </tr>
-                                                         
-                    @endfor
-                
-                    @endforeach
 
+                    </tr>
+                      
+            
+          
+       
+                    </td>
+                   
+                    </tr>
+           
                      </tbody>
                     </table>
             </div>
