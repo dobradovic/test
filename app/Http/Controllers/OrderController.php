@@ -99,10 +99,14 @@ class OrderController extends Controller
       
     
     $order = Order::with('customer')->with('product')->where('id','=', $id)->get();
-      
-        return view('databank.print', compact('order'));
+     
+        $total = 0;
+       
         
-    
+
+
+        return view('databank.print', compact('order','total'));
+            
     }
 
 

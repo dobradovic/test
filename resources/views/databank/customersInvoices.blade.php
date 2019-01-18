@@ -63,10 +63,13 @@
                     @else
                     <td>Resolved</td>
                     @endif
+
+                     <td><a href="/order/print/{{$prob->id}}" class="hidden-print">Create pdf for customer</a>
+                           </td>
                     </tr>
                                                          
                     @endfor
-                
+
                     @endforeach
                      </tbody>
                     </table>

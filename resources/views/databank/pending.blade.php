@@ -73,7 +73,7 @@
                         <input type="checkbox" name="update_invoice[]" id="update_invoice" value="2" ><input type="submit"></td>
                         </form>
                     <td>
-                        <a href="/order/print/{{$pInvoice->customer->id}}">Create pdf for customer</a>
+                        <a href="/order/print/{{$pInvoice->id}}">Create pdf for customer</a>
                   <!--       <p>Click the button to print the current page.</p>
 
                         <button onclick="myFunction()">Print this page</button>

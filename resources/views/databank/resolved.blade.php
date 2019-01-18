@@ -42,6 +42,7 @@
                     <th>Product code</th>
                     <th>Order ID</th>
                     <th>Status invoice</th>
+                    <th>Print</th> 
                     </tr>
                     </thead>
                     <tbody>
@@ -58,10 +59,12 @@
                     <td>{{$rInvoice->product[$i]->name}}</td>
                     <td>{{$rInvoice->product[$i]->code}}</td>
                     <td>{{$rInvoice->id}}</td>
+
                   
                    
                     <td>Resolved</td>
-              
+                    <td><a href="/order/print/{{$rInvoice->id}}" class="hidden-print">Create pdf for customer</a>
+                    </td>
                     @endif
                     </tr>
                                                          
