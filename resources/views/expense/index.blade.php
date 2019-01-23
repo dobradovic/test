@@ -20,6 +20,7 @@
 
 			@endif
 			</div>
+
 			@if(count($expenses) == 0)
 			  <h1 style="text-align: center"> There is no Expenses</h1>
 			@endif
@@ -35,7 +36,7 @@
 	               
 	 	         </div>
 	         </div>
-
+<!-- 
 	          	<div class="col-md-6">
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
@@ -58,7 +59,7 @@
 		            </div>
 	               
 	 	         </div>
-	         </div>
+	         </div> -->
 
 	      
 	   		</div>
@@ -95,17 +96,16 @@
 	                    </div>
 	               			
 
-	             
+	             	
 	            </div>
 
 			</div>
-			
+	
 
 
 	       
 			@endforeach	
 		
-		</div>
 	
 	</div>
 	</div>

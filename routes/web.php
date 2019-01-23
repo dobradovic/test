@@ -91,6 +91,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('expense/edit/{id}', 'ExpenseController@edit');
 	Route::patch('expense/update/{id}', 'ExpenseController@update');
 	Route::get('expense/salaries', 'ExpenseController@salaries');
+	Route::post('expensesFromTo', 'ExpenseController@date');
+	Route::get('expense/time', 'ExpenseController@time');
+
 
 	Route::get('asset/create', 'AssetsController@create');
 	Route::get('asset/index', 'AssetsController@index');

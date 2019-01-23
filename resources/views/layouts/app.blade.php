@@ -227,6 +227,10 @@
                                       Show all Expenses 
                                     </a>
 
+                                      <a class="dropdown-item" href="/expense/time">
+                                      Expenses for selected period 
+                                    </a>
+
                                 </div>
 
 

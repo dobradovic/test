@@ -90,8 +90,10 @@
                      <td>
                          {{$order[0]->id}}
                     </td>
-                    <td>
-                          @if($oneOrder->status == 1)
+                    <td>  
+
+                         
+                          @if($order[0]->status == 1)
                           Pending
                           @else
                           Resolved

@@ -10,6 +10,7 @@ use App\Expense;
 use App\Employee;
 use App\Assets;
 use DB;
+use DateTime;
 
 
 class ExpenseController extends Controller
@@ -167,5 +168,51 @@ class ExpenseController extends Controller
         return redirect()->back()->with(['expense' => $expense, 'message' => 'Expense updated']);
     }
 
- 
+    public function date(Request $request)
+    {
+      
+        $total=0;
+        $salary=0;
+        $ft = 0;
+
+        $from = $request->input('date_from');
+        $to = $request->input('date_to');
+
+        $ft = (strtotime($to) - strtotime($from));
+
+        $from =$request->input('date_from');
+        $to = $request->input('date_to');
+
+
+        $fromDate = new DateTime($request->input('date_from'));
+        $toDate = new DateTime($request->input('date_to'));
+        $ft = $fromDate->diff($toDate);
+        $months = $ft->format('%m');
+
+
+         $proba=Expense::whereBetween('created_at',[$from.' 00:00:00', $to.' 23:59:59'])
+                   ->orderByDesc('created_at')
+                   ->get();
+
+                     $proba1=Employee::whereBetween('created_at',[$from.' 00:00:00', $to.' 23:59:59'])
+                   ->orderByDesc('created_at')
+                   ->get();
+
+        return back()->with(['proba' => $proba, 'proba1' => $proba1, 'from' => $from, 'to' => $to, 'months' => $months]);
+
+    }
+
+
+     public function time()
+    {
+
+      $total=0;
+      $salary=0;
+  
+        
+      return view('expense.time',compact('total','salary'));
+    }
+
+
+     
   }
