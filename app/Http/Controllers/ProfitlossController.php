@@ -124,7 +124,7 @@ class ProfitlossController extends Controller
 
           //$product->real_selling_price -
 
-          $revenue +=  $product->buying_price;
+          $revenue +=  $product->real_selling_price - $product->buying_price ;
             
         }
         

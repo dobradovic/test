@@ -19,8 +19,7 @@
 			<p>
 				Expenses to : 
 			</p>
-	
-				{{ Form::date('date_to','',array('required' => 'required', 'class' => 'form-control')) }}
+					{{ Form::date('date_to','',array('required' => 'required', 'class' => 'form-control')) }}
 		<p>
 
 		</p>

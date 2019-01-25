@@ -190,6 +190,7 @@ class ExpenseController extends Controller
         $months = $ft->format('%m');
 
 
+
          $proba=Expense::whereBetween('created_at',[$from.' 00:00:00', $to.' 23:59:59'])
                    ->orderByDesc('created_at')
                    ->get();
@@ -197,6 +198,15 @@ class ExpenseController extends Controller
                      $proba1=Employee::whereBetween('created_at',[$from.' 00:00:00', $to.' 23:59:59'])
                    ->orderByDesc('created_at')
                    ->get();
+
+                   foreach($proba1 as $employee){
+                    if($from <= $employee->created_at){
+                      $lessDate = $employee->created_at;
+                    }
+                    elseif($from >= $employee->create_at){
+                      $higherDate = $employee->created_at;
+                  }
+                }
 
         return back()->with(['proba' => $proba, 'proba1' => $proba1, 'from' => $from, 'to' => $to, 'months' => $months]);
 

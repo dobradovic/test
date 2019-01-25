@@ -45,7 +45,7 @@ class OrderController extends Controller
         $order->product()->attach($products_id);
 
         $proba = Order::with('product')->with('customer')->get();
-
+        
        return view('databank.showOrder',compact('proba'));
       
       

@@ -20,7 +20,7 @@
 	            <div class="card mb-4 shadow">
 		           <div class="card-header">
 		                <h5 style="text-align: center"> 
-		             Products available / pedning:<p style="color:#85bb65">{{$profit_product}},00$</p>
+		             Products available / pending:<p style="color:#85bb65">{{$profit_product}},00$</p>
 		             </h5>
 		            </div>
 	               
