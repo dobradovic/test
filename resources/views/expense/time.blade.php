@@ -80,7 +80,9 @@
 			</p>
 		
 
-		</div>
+		</div>	
+
+		
 
 	
 	@endforeach

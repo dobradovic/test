@@ -188,7 +188,8 @@ class ExpenseController extends Controller
         $toDate = new DateTime($request->input('date_to'));
         $ft = $fromDate->diff($toDate);
         $months = $ft->format('%m');
-
+        
+ 
 
 
          $proba=Expense::whereBetween('created_at',[$from.' 00:00:00', $to.' 23:59:59'])
@@ -196,12 +197,25 @@ class ExpenseController extends Controller
                    ->get();
 
                      $proba1=Employee::whereBetween('created_at',[$from.' 00:00:00', $to.' 23:59:59'])
-                   ->orderByDesc('created_at')
-                   ->get();
+                                    ->get();
 
                    foreach($proba1 as $employee){
-                    if($from <= $employee->created_at){
-                      $lessDate = $employee->created_at;
+                    if($fromDate <= $employee->created_at){
+
+                    $fromDate = $employee->created_at;
+
+                    $toDate = new DateTime($request->input('date_to'));
+                  
+                    $ft1 = $fromDate->diff($toDate);
+
+                    $months1 = $ft1->format('%m');
+
+                    
+                  
+       
+
+                      $salaryForPeriod = $employee->salary * $months1;
+                      dd($salaryForPeriod);
                     }
                     elseif($from >= $employee->create_at){
                       $higherDate = $employee->created_at;
