@@ -198,8 +198,10 @@ class ExpenseController extends Controller
 
                      $proba1=Employee::whereBetween('created_at',[$from.' 00:00:00', $to.' 23:59:59'])
                                     ->get();
-
+                    $salaryForPeriod = [];
+                    $i=-1;
                    foreach($proba1 as $employee){
+                    $i++;
                     if($fromDate <= $employee->created_at){
 
                     $fromDate = $employee->created_at;
@@ -209,20 +211,25 @@ class ExpenseController extends Controller
                     $ft1 = $fromDate->diff($toDate);
 
                     $months1 = $ft1->format('%m');
-
-                    
+                      
                   
-       
-
-                      $salaryForPeriod = $employee->salary * $months1;
-                      dd($salaryForPeriod);
+                      $salaryForPeriod[$i] = $employee->salary * $months1;
+                       //$value = session('salaryForPeriod');
+                    
                     }
                     elseif($from >= $employee->create_at){
-                      $higherDate = $employee->created_at;
+                      $higherDate = $fromDate;
+
+        
+                    $toDate = new DateTime($request->input('date_to'));
+                    $ft = $higherDate->diff($toDate);
+                    $months = $ft->format('%m');
+                    $salaryForPeriod[$i] = $employee->salary * $months1;
+                    
                   }
                 }
 
-        return back()->with(['proba' => $proba, 'proba1' => $proba1, 'from' => $from, 'to' => $to, 'months' => $months]);
+        return back()->with(['proba' => $proba, 'proba1' => $proba1, 'from' => $from, 'to' => $to, 'months' => $months, 'salaryForPeriod' => $salaryForPeriod]);
 
     }
 
@@ -232,9 +239,10 @@ class ExpenseController extends Controller
 
       $total=0;
       $salary=0;
+      $total_salary =0;
   
         
-      return view('expense.time',compact('total','salary'));
+      return view('expense.time',compact('total','salary','total_salary'));
     }
 
 

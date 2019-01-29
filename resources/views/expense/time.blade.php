@@ -74,10 +74,9 @@
 		
 		<div class="shadow p-3 mb-5 bg-white rounded">
 			<p>Name: {{$p1->first_name}}</p>
-			<p>Amount: {{$p1->salary}}</p>
-			<p> 
-			Created at {{$p1->created_at->format('n')}}
-			</p>
+			<p>Amount: {{$p1->salary}} / monthly</p>
+
+
 		
 
 		</div>	
@@ -86,8 +85,21 @@
 
 	
 	@endforeach
-		<b>Sallary for selected period: {{$salary}}</b>
-		<h1>Total:{{$total + $salary}},00$</h1>	
+
+	
+		
+		@foreach(session('salaryForPeriod') as $sfp)
+			
+			<?php
+				
+				$total_salary += $sfp;
+			?>
+		
+			
+		@endforeach
+
+			<h2>Total salary for selected period: {{$total_salary}}</h2>
+				<h1>Total:{{$total + $total_salary}},00$</h1>	
 	@endif
 		</div>
 </div>
