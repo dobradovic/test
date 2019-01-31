@@ -67,18 +67,18 @@
 	<b>Expense for period from {{session('from')}} to {{session('to')}} </b>
 	</p>
 	@foreach(session('proba1') as $p1)
+	
 		<?php
+
 			$salary += $p1->salary;
 			$m = $p1->created_at->format('n');
 		?>
-		
+			
 		<div class="shadow p-3 mb-5 bg-white rounded">
 			<p>Name: {{$p1->first_name}}</p>
+
 			<p>Amount: {{$p1->salary}} / monthly</p>
-
-
-		
-
+	
 		</div>	
 
 		
@@ -89,7 +89,7 @@
 	
 		
 		@foreach(session('salaryForPeriod') as $sfp)
-			
+
 			<?php
 				
 				$total_salary += $sfp;
@@ -99,7 +99,8 @@
 		@endforeach
 
 			<h2>Total salary for selected period: {{$total_salary}}</h2>
-				<h1>Total:{{$total + $total_salary}},00$</h1>	
+				<h1>Total:{{$total + $total_salary}},00$</h1>
+
 	@endif
 		</div>
 </div>

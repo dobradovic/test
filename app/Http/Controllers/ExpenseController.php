@@ -212,8 +212,10 @@ class ExpenseController extends Controller
 
                     $months1 = $ft1->format('%m');
                       
-                  
-                      $salaryForPeriod[$i] = $employee->salary * $months1;
+                      if($months1 < 1)
+                        $salaryForPeriod[$i] = $employee->salary;
+                      else
+                        $salaryForPeriod[$i] = $employee->salary * $months1;
                        //$value = session('salaryForPeriod');
                     
                     }
@@ -224,8 +226,9 @@ class ExpenseController extends Controller
                     $toDate = new DateTime($request->input('date_to'));
                     $ft = $higherDate->diff($toDate);
                     $months = $ft->format('%m');
+                  
                     $salaryForPeriod[$i] = $employee->salary * $months1;
-                    
+                  
                   }
                 }
 
